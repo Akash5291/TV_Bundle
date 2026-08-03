@@ -38,7 +38,7 @@ public class HamburgerManager : MonoBehaviour
 
     void Update()
     {
-        UpdateSidebarWidth();
+        //UpdateSidebarWidth();
         UpdateActiveSectionFromFocus();
     }
 
