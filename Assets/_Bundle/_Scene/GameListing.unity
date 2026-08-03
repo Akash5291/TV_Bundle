@@ -3726,7 +3726,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 27b684431c7741798af4f8d753bc525a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  popup: {fileID: 0}
+  popup: {fileID: 665237139}
 --- !u!224 &806063182
 RectTransform:
   m_ObjectHideFlags: 0
@@ -5330,6 +5330,7 @@ GameObject:
   - component: {fileID: 1182352912}
   - component: {fileID: 1182352911}
   - component: {fileID: 1182352910}
+  - component: {fileID: 421252697}
   m_Layer: 5
   m_Name: HomePanel_Scroll
   m_TagString: Untagged
@@ -7989,3 +7990,17 @@ SceneRoots:
   - {fileID: 531354227}
   - {fileID: 1349261440}
   - {fileID: 1188073925}
+--- !u!114 &421252697
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1182352908}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 55f12da45da144bd8e05fe78bce717a3, type: 3}
+  m_Name:
+  m_EditorClassIdentifier:
+  padding: 40
+  scrollSpeed: 10
