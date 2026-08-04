@@ -23,6 +23,8 @@ public class HamburgerManager : MonoBehaviour
 
     int activeIndex = -1;
 
+    public bool IsHomeSection => activeIndex == 0;
+
     void Start()
     {
         SelectSection(defaultSection);
