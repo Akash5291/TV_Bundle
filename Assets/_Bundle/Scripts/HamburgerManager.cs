@@ -88,7 +88,23 @@ public class HamburgerManager : MonoBehaviour
             bool active = i == index;
             var section = sections[i];
             if (section.selector != null) section.selector.SetActive(active);
-            if (section.contentPanel != null) section.contentPanel.SetActive(active);
+            if (section.contentPanel != null)
+            {
+                section.contentPanel.SetActive(active);
+                if (active) ResetScroll(section.contentPanel);
+            }
         }
+    }
+
+    // Coming back to a section (e.g. Home) should land at the top, not
+    // wherever the user last scrolled to before switching away.
+    static void ResetScroll(GameObject panel)
+    {
+        var scrollRect = panel.GetComponent<ScrollRect>();
+        if (scrollRect == null) return;
+
+        Canvas.ForceUpdateCanvases();
+        scrollRect.verticalNormalizedPosition = 1f;
+        scrollRect.horizontalNormalizedPosition = 0f;
     }
 }
