@@ -30,8 +30,15 @@ public class CarouselAutoScroll : MonoBehaviour
         var item = selected.transform as RectTransform;
         if (item == null || !item.IsChildOf(content)) return;
 
-        if (scrollRect.horizontal) ScrollToward(item, horizontal: true);
-        if (scrollRect.vertical) ScrollToward(item, horizontal: false);
+        // Scroll to reveal the whole top-level section the focused item lives
+        // in (e.g. the featured banner, or a full card row), not just the
+        // item's own tiny rect - otherwise a section can end up half-hidden
+        // even though the item itself is technically in view.
+        var section = item;
+        while (section.parent != content) section = (RectTransform)section.parent;
+
+        if (scrollRect.horizontal) ScrollToward(section, horizontal: true);
+        if (scrollRect.vertical) ScrollToward(section, horizontal: false);
     }
 
     void ScrollToward(RectTransform item, bool horizontal)
