@@ -41,5 +41,7 @@ public class LogoSplashAnimation : MonoBehaviour
         rect.localScale = Vector3.one;
         color.a = 1f;
         logoImage.color = color;
+
+        ActionContainer.onSplashScreenAnimComplete?.Invoke();
     }
 }

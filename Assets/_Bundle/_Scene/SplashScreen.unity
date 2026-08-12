@@ -147,8 +147,8 @@ RectTransform:
   m_GameObject: {fileID: 266509043}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 0.2, y: 0.2, z: 0.2}
+  m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 1441114479}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -292,6 +292,45 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
+--- !u!114 &499321733
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 266509043}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2f994e5794c04b55b8676162c9a3a11f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  logoImage: {fileID: 266509045}
+  duration: 10
+  startScale: 0.2
+  easing:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1 &738280252
 GameObject:
   m_ObjectHideFlags: 0
@@ -537,7 +576,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.6603774, g: 0.6603774, b: 0.6603774, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -1269,20 +1308,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aae31c793690f47e393e02613bc8c6c3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GetBaseURLFrom: 
   base_url: 
   e_qrController: {fileID: 0}
   qrIMG: {fileID: 0}
   Loading: {fileID: 0}
   userPofileFound: 0
-  gameBundleData:
-    feature_game:
-      title: 
-      description: 
-      image_url: 
-      download_link: 
-    new_arrival: []
-    our_games: []
   QRInstruction: {fileID: 0}
   internetObj: {fileID: 6983796206003204651}
   footerText: {fileID: 7923870343948063517}
@@ -1290,8 +1320,6 @@ MonoBehaviour:
   ratingImg: {fileID: 0}
   highScore: {fileID: 0}
   myScore: {fileID: 0}
-  inHouseAds:
-    ourAds: []
 --- !u!114 &7923870343890380208
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1651,18 +1679,3 @@ SceneRoots:
   - {fileID: 738280256}
   - {fileID: 1572636695}
   - {fileID: 1800492360}
---- !u!114 &499321733
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 266509043}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2f994e5794c04b55b8676162c9a3a11f, type: 3}
-  m_Name:
-  m_EditorClassIdentifier:
-  logoImage: {fileID: 266509045}
-  duration: 0.8
-  startScale: 0.6

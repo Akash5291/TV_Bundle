@@ -1,10 +1,7 @@
 using System;
 using System.Collections;
-using System.Collections.Generic;
-using System.Runtime.InteropServices;
 using System.Text;
 using TMPro;
-using Unity.Android.Gradle.Manifest;
 using UnityEngine;
 using UnityEngine.Networking;
 using UnityEngine.SceneManagement;

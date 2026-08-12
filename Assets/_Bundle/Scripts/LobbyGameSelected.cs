@@ -47,6 +47,7 @@ public class LobbyGameSelected : MonoBehaviour
         else
         {
             string packageName = AndroidAppLauncher.ExtractPackageName(data.download_link);
+            Debug.LogFormat("Package name : " + packageName);
             if (AndroidAppLauncher.IsAppInstalled(packageName))
             {
                 installedPackageName = packageName;

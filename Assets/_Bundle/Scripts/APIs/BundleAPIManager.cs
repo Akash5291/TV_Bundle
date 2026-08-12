@@ -28,6 +28,16 @@ public class BundleAPIManager : MonoBehaviour
 
     int closeTime = 5;
 
+    private void OnEnable()
+    {
+        ActionContainer.onSplashScreenAnimComplete += onLoadGameLobby;
+    }
+
+    private void OnDisable()
+    {
+        ActionContainer.onSplashScreenAnimComplete -= onLoadGameLobby;
+    }
+
     private void Awake()
     {
         if (Instance == null)
@@ -163,8 +173,15 @@ public class BundleAPIManager : MonoBehaviour
                 //Debug.Log("Translated info: " + www.downloadHandler.text);
                 inHouseAds = JsonUtility.FromJson<InhouseAds>(www.downloadHandler.text);
             }
-            Invoke("jumpToGameLobby", 1f);
+            //Invoke("jumpToGameLobby", 1f);
         }
+    }
+    #endregion
+
+    #region Action Receiver Method
+    void onLoadGameLobby()
+    {
+        jumpToGameLobby();
     }
     #endregion
 
