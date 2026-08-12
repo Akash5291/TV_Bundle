@@ -36,28 +36,28 @@ public class AdsManager : MonoBehaviour
     void showInhouseAds()
     {
         int cnt = 0;
-        if (APIManager.Instance.inHouseAds.ourAds.Count <= 0)
+        if (BundleAPIManager.Instance.inHouseAds.ourAds.Count <= 0)
             mainParent.SetActive(false);
         else
         {
             mainParent.SetActive(true);
-            APIManager.Instance.inHouseAds.ourAds.OrderBy(ad => ad.priority).ToList();
+            BundleAPIManager.Instance.inHouseAds.ourAds.OrderBy(ad => ad.priority).ToList();
             int ai = 1;
-            foreach (var a in APIManager.Instance.inHouseAds.ourAds)
+            foreach (var a in BundleAPIManager.Instance.inHouseAds.ourAds)
             {
-                APIManager.Instance.inHouseAds.ourAds[ai - 1].index = ai;
+                BundleAPIManager.Instance.inHouseAds.ourAds[ai - 1].index = ai;
                 ai++;
             }
 
             int startIndex = PlayerPrefs.GetInt("AdsShown");
-            if (startIndex >= APIManager.Instance.inHouseAds.ourAds.Count)
+            if (startIndex >= BundleAPIManager.Instance.inHouseAds.ourAds.Count)
             {
                 startIndex = 0;
                 PlayerPrefs.SetInt("AdsShown", 0);
             }
-            for (int i = startIndex; i < APIManager.Instance.inHouseAds.ourAds.Count; i++)
+            for (int i = startIndex; i < BundleAPIManager.Instance.inHouseAds.ourAds.Count; i++)
             {
-                var ad = APIManager.Instance.inHouseAds.ourAds[i];
+                var ad = BundleAPIManager.Instance.inHouseAds.ourAds[i];
                 Debug.Log($"[{ad.index}] {ad.game_name} - {ad.download_url}");
                 if (!ad.game_bundle_name.Equals(Application.identifier))
                 {
@@ -85,7 +85,7 @@ public class AdsManager : MonoBehaviour
 
     private void Update()
     {
-        if (!mainParent.activeSelf && APIManager.Instance.inHouseAds.ourAds.Count > 0)
+        if (!mainParent.activeSelf && BundleAPIManager.Instance.inHouseAds.ourAds.Count > 0)
             showInhouseAds();
     }
 }

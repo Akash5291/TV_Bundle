@@ -4,30 +4,25 @@ using UnityEngine.Networking;
 using UnityEngine.UI;
 using static SerializableClasses;
 
-public class AdsItem : MonoBehaviour
+public class GameBundleItem : MonoBehaviour
 {
+    [SerializeField] Image gameBanner;
+    [SerializeField] BundleGameData gameItem;
 
-    [SerializeField] Image icon;
-    [SerializeField] TMPro.TMP_Text gName;
-    public Button downloadBtn;
-
-    string dURL = "";
-
-    public void onSetGameData(AdsItemData ads)
+    public void setGameBundleData(BundleGameData data)
     {
-        gName.text = ads.game_name;
-        dURL = ads.download_url;
-        StartCoroutine(DownloadAndSetImage(ads.game_icon));
+        gameItem = data;
+        StartCoroutine(DownloadAndSetImage(data.image_url));
     }
 
     IEnumerator DownloadAndSetImage(string imageUrl)
     {
-        UnityWebRequest www = UnityWebRequestTexture.GetTexture(imageUrl);
+        UnityWebRequest www = UnityWebRequestTexture.GetTexture(BundleAPIManager.Instance.base_url + imageUrl);
         yield return www.SendWebRequest();
 
         if (www.result != UnityWebRequest.Result.Success)
         {
-            Debug.LogError("Failed to download ads game icon: " + www.error);
+            Debug.LogError("Failed to download bundle game icon: " + www.error);
         }
         else
         {
@@ -39,13 +34,13 @@ public class AdsItem : MonoBehaviour
             Sprite sprite = Sprite.Create(texture, rect, pivot);
 
             // Assign to Image component
-            icon.sprite = sprite;
+            gameBanner.sprite = sprite;
         }
     }
 
-    public void onDonwload()
+    public void onGameSelecteToPlay()
     {
-        Application.OpenURL(dURL);
+        ActionContainer.onGameSelectToPlay?.Invoke(gameBanner.sprite, gameItem);
     }
 
 }

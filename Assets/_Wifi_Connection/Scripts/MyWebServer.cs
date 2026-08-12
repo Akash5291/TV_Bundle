@@ -108,8 +108,6 @@ public class MyWebServer : MonoBehaviour
         Debug.Log("New Connection: " + _wsServer.GetConnectionsCount().ToString() + ", ip: " + connectIP);
         addNewConnection(connectIP);
 
-        Debug.Log("akash: " + connection.GetURL());
-
         if (!WifiManager.Instance.isClientConnected)
             WifiManager.Instance.onClientConnected();
     }

@@ -33,7 +33,7 @@ public class QRCodeEncodeController : MonoBehaviour {
 	public int e_QRCodeWidth = 512;
 	public int e_QRCodeHeight = 512;
 	public delegate void QREncodeFinished(Texture2D tex);  
-	public  event QREncodeFinished onQREncodeFinished;  
+	public event QREncodeFinished onQREncodeFinished;  
 	BitMatrix byteMatrix;
 	public CodeMode eCodeFormat = CodeMode.QR_CODE;
 	public Texture2D e_QRLogoTex;

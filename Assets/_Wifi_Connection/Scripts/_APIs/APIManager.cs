@@ -4,76 +4,13 @@ using System.Collections.Generic;
 using System.Runtime.InteropServices;
 using System.Text;
 using TMPro;
+using Unity.Android.Gradle.Manifest;
 using UnityEngine;
 using UnityEngine.Networking;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
-using UnityEngine.Video;
 
-[Serializable]
-public class InsertData
-{
-    public string user_id;
-    public string server_ip_1;
-    public string server_ip_2;
-    public string server_ip;
-    public string gamecode;
-}
-
-[Serializable]
-public class UpdateData
-{
-    public string user_id;
-    public string gamecode;
-}
-
-[Serializable]
-public class GameCode
-{
-    public string user_id;
-    public string server_ip;
-}
-
-public class CommonData
-{
-    public string device_id;
-    public string game_id;
-}
-
-[Serializable]
-public class GetGameProfile
-{
-    public string score;
-    public string max_score;
-    public string rating;
-    public string avg_rating;
-    public string active_users;
-}
-
-[Serializable]
-public class TVURL
-{
-    public string base_url;
-}
-
-
-[Serializable]
-public class InhouseAds
-{
-    public List<AdsItemData> ourAds = new List<AdsItemData>();
-}
-
-[Serializable]
-public class AdsItemData
-{
-    public int index;
-    public int priority;
-    public string game_icon;
-    public string game_name;
-    public string game_bundle_name;
-    public string download_url;
-    public string preview_video_url;
-}
+using static SerializableClasses;
 
 public class APIManager : MonoBehaviour
 {
@@ -88,7 +25,7 @@ public class APIManager : MonoBehaviour
 
     public static APIManager Instance = null;
 
-    [SerializeField] string TVBaseURL = "";
+    public string base_url = "";
     [SerializeField] QRCodeEncodeController e_qrController;
     [SerializeField] Image qrIMG;
     [SerializeField] GameObject Loading;
@@ -107,48 +44,38 @@ public class APIManager : MonoBehaviour
     [SerializeField] TMP_Text highScore;
     [SerializeField] TMP_Text myScore;
 
-    int closeTime = 5;
-
-    public string base_url = "";
     string getQRCode_URL = "";
     string setServerIPURL = "";
     string getUserProfile_URL = "";
     string uuid = "";
 
-    [Header("In-House Ads")]
-    public InhouseAds inHouseAds;
-
-    //[Header("Game Video Preview")]
-    //[SerializeField] GameObject preview_player;
-    //[SerializeField] VideoPlayer videoPlayer;
-
     private void Awake()
     {
         if (Instance == null)
             Instance = this;
+
+        PlayerPrefs.SetInt("MyLevel", PlayerPrefs.GetInt("MyLevel", 0));
+    }
+
+    private void OnEnable()
+    {
+        e_qrController.onQREncodeFinished += qrEncodeFinished;//Add Finished Event
+    }
+
+    private void OnDisable()
+    {
+        e_qrController.onQREncodeFinished -= qrEncodeFinished;//remove Finished Event
     }
 
     void Start()
     {
-        PlayerPrefs.SetInt("AdsShown", PlayerPrefs.GetInt("AdsShown", 0));
-        PlayerPrefs.SetInt("MyLevel", PlayerPrefs.GetInt("MyLevel", 0));
-        e_qrController.onQREncodeFinished += qrEncodeFinished;//Add Finished Event
-    }
+        base_url = BundleAPIManager.Instance.base_url;
 
-    public void onCallInitApis()
-    {
-        if (Application.internetReachability != NetworkReachability.ReachableViaLocalAreaNetwork)
-        {
-            closeTime = 5;
-            internetObj.SetActive(true);
-            footerText.text = "";
-            Invoke("counterCheck", 1f);
-        }
-        else
-        {
-            internetObj.SetActive(false);
-            onGetBaseURL();
-        }
+        getQRCode_URL = base_url + StaticData.getQRCode_URL;
+        setServerIPURL = base_url + StaticData.setServerIPURL;
+        getUserProfile_URL = base_url + StaticData.getUserProfile_URL;
+        setupUUID();
+        LanguageSelector.Instance.onGetTranslatorText();
     }
 
     void setupUUID()
@@ -172,74 +99,8 @@ public class APIManager : MonoBehaviour
 #endif
 
         //Debug.Log("Return cookies value is: " + uuid);
-        Screen.sleepTimeout = SleepTimeout.NeverSleep;
+        UnityEngine.Screen.sleepTimeout = SleepTimeout.NeverSleep;
     }
-
-    void counterCheck()
-    {
-        if (closeTime <= 0)
-        {
-#if UNITY_WEBGL
-            footerText.text = "";
-#else
-            Application.Quit();
-#endif
-        }
-        else
-        {
-            closeTime--;
-#if UNITY_WEBGL
-            footerText.text = "";
-#else
-            footerText.text = "0" + closeTime.ToString();
-#endif
-            Invoke("counterCheck", 1f);
-        }
-    }
-
-#region GetBaseURL
-    void onGetBaseURL()
-    {
-        RayCastBlock();
-        StartCoroutine(getBaseURL());
-    }
-
-    IEnumerator getBaseURL()
-    {
-        CommonData user = new CommonData();
-        user.device_id = "dummy";
-        user.game_id = WifiManager.Instance.gameID;
-        string data = JsonUtility.ToJson(user);
-
-        UnityWebRequest request = new UnityWebRequest(TVBaseURL + ".php", "POST");
-        request.SetRequestHeader("Content-Type", "application/json");
-        request.uploadHandler = new UploadHandlerRaw(Encoding.ASCII.GetBytes(data)) { contentType = "application/json" };
-        request.downloadHandler = new DownloadHandlerBuffer();
-        //Debug.Log("TVBaseURL: " + TVBaseURL);
-        yield return request.SendWebRequest();
-
-        RaycastUnblock();
-        if (request.result == UnityWebRequest.Result.ConnectionError)
-        {
-            Debug.Log("getBaseURL: " + request.error);
-        }
-        else
-        {
-            //Debug.Log("Response: " + request.responseCode + "," + request.downloadHandler.text);
-            RaycastUnblock();
-            TVURL tVURL = JsonUtility.FromJson<TVURL>(request.downloadHandler.text);
-            base_url = tVURL.base_url;
-            //Debug.Log("base_url: " + base_url);
-            getQRCode_URL = base_url + "matchuser_id.php";
-            setServerIPURL = base_url + "multipleserver_ip_insert.php";
-            getUserProfile_URL = base_url + "getdetails.php";
-            setupUUID();
-
-            LanguageSelector.Instance.onGetTranslatorText();
-            getInhouseAds();
-        }
-    }
-    #endregion
 
     #region GenerateUnique_ID
 
@@ -277,7 +138,7 @@ public class APIManager : MonoBehaviour
     }
 #endif
 
-        void OnGenerateQR(string code)
+    void OnGenerateQR(string code)
     {
         e_qrController.Encode(code);
     }
@@ -431,7 +292,7 @@ public class APIManager : MonoBehaviour
         // check internet
         UnityWebRequest request;
 
-        if (Application.internetReachability == NetworkReachability.NotReachable)
+        if (UnityEngine.Application.internetReachability == NetworkReachability.NotReachable)
         {
             Debug.Log("Internet issuse");
         }
@@ -534,33 +395,4 @@ public class APIManager : MonoBehaviour
     }
     #endregion
 
-    #region Inhouse_Ads
-    void getInhouseAds()
-    {
-        StartCoroutine(getAdsData());
-    }
-
-    IEnumerator getAdsData()
-    {
-        using (UnityWebRequest www = UnityWebRequest.Get(base_url + "inhouse_ads/our_ads.txt"))
-        {
-            www.SetRequestHeader("Content-Type", "application/json");
-            www.SetRequestHeader("Accept", "application/json");
-            www.downloadHandler = new DownloadHandlerBuffer();
-
-            yield return www.SendWebRequest();
-
-            if (www.result == UnityWebRequest.Result.ConnectionError)
-            {
-                Debug.Log("getBaseURL: " + www.error);
-            }
-            else
-            {
-                //Debug.Log("Translated info: " + www.downloadHandler.text);
-                inHouseAds = JsonUtility.FromJson<InhouseAds>(www.downloadHandler.text);
-            }
-        }
-    }
-
-    #endregion
 }

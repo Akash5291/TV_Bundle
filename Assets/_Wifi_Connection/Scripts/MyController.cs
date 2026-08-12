@@ -75,7 +75,7 @@ public class MyController : MonoBehaviour
             androidServer.transform.gameObject.SetActive(value);
             androidServer.Connect();
 #endif
-            APIManager.Instance.onCallInitApis();
+            //APIManager.Instance.onCallInitApis();Akash
         }
         else
         {

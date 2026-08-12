@@ -2,6 +2,12 @@ using UnityEngine;
 
 public class StaticData
 {
+    [Header("API data file")]
+    public const string bundleData_URL = "tv_bundle_games/bundle_game_list";
+    public const string getQRCode_URL = "matchuser_id.php";
+    public const string setServerIPURL = "multipleserver_ip_insert.php";
+    public const string getUserProfile_URL = "getdetails.php";
+
     [Header("General Game screen / state")]
     public const string Home = "Home";
     public const string Category = "Categories";

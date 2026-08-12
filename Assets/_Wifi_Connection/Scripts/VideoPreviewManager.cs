@@ -18,7 +18,7 @@ public class VideoPreviewManager : MonoBehaviour
     void startPlayer()
     {
         Debug.Log("startPlayer");
-        foreach (var ad in APIManager.Instance.inHouseAds.ourAds)
+        foreach (var ad in BundleAPIManager.Instance.inHouseAds.ourAds)
         {
             if (ad.game_bundle_name.Equals(Application.identifier))
                 player.url = ad.preview_video_url;
