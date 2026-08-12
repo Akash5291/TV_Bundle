@@ -13,6 +13,14 @@ public class GameBundleItem : MonoBehaviour
     {
         gameItem = data;
         StartCoroutine(DownloadAndSetImage(data.image_url));
+
+        // Resolve install status once up front, rather than re-checking every
+        // time this game is opened from the lobby.
+        if (!string.IsNullOrEmpty(data.download_link))
+        {
+            data.installedPackageName = AndroidAppLauncher.ExtractPackageName(data.download_link);
+            data.isInstalled = AndroidAppLauncher.IsAppInstalled(data.installedPackageName);
+        }
     }
 
     IEnumerator DownloadAndSetImage(string imageUrl)

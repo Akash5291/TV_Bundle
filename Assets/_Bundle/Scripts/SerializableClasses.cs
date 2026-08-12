@@ -12,6 +12,11 @@ public class SerializableClasses
         public string description;
         public string image_url;
         public string download_link;
+
+        // Resolved locally at list-setup time (see GameBundleItem) - not part
+        // of the server JSON, JsonUtility just leaves these at their defaults.
+        [NonSerialized] public bool isInstalled;
+        [NonSerialized] public string installedPackageName;
     }
 
     [Serializable]

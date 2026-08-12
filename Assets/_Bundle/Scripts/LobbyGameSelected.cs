@@ -1,5 +1,6 @@
 using TMPro;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 public class LobbyGameSelected : MonoBehaviour
@@ -12,7 +13,7 @@ public class LobbyGameSelected : MonoBehaviour
     [SerializeField] GameObject downloadBtn;
 
     SerializableClasses.BundleGameData currentGameData;
-    string installedPackageName;
+    GameObject previouslySelected;
 
     private void OnEnable()
     {
@@ -27,6 +28,7 @@ public class LobbyGameSelected : MonoBehaviour
     public void backFromGameSelected()
     {
         gameSelectedScreenObj.SetActive(false);
+        EventSystem.current?.SetSelectedGameObject(previouslySelected);
     }
 
     private void LobbyGameSelect(Sprite bannerSprite, SerializableClasses.BundleGameData data)
@@ -35,38 +37,26 @@ public class LobbyGameSelected : MonoBehaviour
         gameTitle.text = data.title;
         gameDescription.text = data.description;
         currentGameData = data;
-        installedPackageName = null;
         playBtn.SetActive(false);
         downloadBtn.SetActive(false);
 
-        if (string.IsNullOrEmpty(data.download_link))
-        {
-            // No download link - this game ships inside the app bundle itself.
-            playBtn.SetActive(true);
-        }
-        else
-        {
-            string packageName = AndroidAppLauncher.ExtractPackageName(data.download_link);
-            Debug.LogFormat("Package name : " + packageName);
-            if (AndroidAppLauncher.IsAppInstalled(packageName))
-            {
-                installedPackageName = packageName;
-                playBtn.SetActive(true);
-            }
-            else
-            {
-                downloadBtn.SetActive(true);
-            }
-        }
+        // No download link means this game ships inside the app bundle itself;
+        // otherwise install status was already resolved when the lobby item
+        // was set up (see GameBundleItem.setGameBundleData).
+        bool showPlay = string.IsNullOrEmpty(data.download_link) || data.isInstalled;
+        playBtn.SetActive(showPlay);
+        downloadBtn.SetActive(!showPlay);
 
+        previouslySelected = EventSystem.current != null ? EventSystem.current.currentSelectedGameObject : null;
         gameSelectedScreenObj.SetActive(true);
+        EventSystem.current?.SetSelectedGameObject(showPlay ? playBtn : downloadBtn);
     }
 
     public void onPlayBtnClick()
     {
-        if (!string.IsNullOrEmpty(installedPackageName))
+        if (currentGameData != null && currentGameData.isInstalled && !string.IsNullOrEmpty(currentGameData.installedPackageName))
         {
-            AndroidAppLauncher.LaunchApp(installedPackageName);
+            AndroidAppLauncher.LaunchApp(currentGameData.installedPackageName);
         }
         else
         {
