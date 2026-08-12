@@ -11,6 +11,9 @@ public class LobbyGameSelected : MonoBehaviour
     [SerializeField] GameObject playBtn;
     [SerializeField] GameObject downloadBtn;
 
+    SerializableClasses.BundleGameData currentGameData;
+    string installedPackageName;
+
     private void OnEnable()
     {
         ActionContainer.onGameSelectToPlay += LobbyGameSelect;
@@ -31,24 +34,48 @@ public class LobbyGameSelected : MonoBehaviour
         gameBanner.sprite = bannerSprite;
         gameTitle.text = data.title;
         gameDescription.text = data.description;
+        currentGameData = data;
+        installedPackageName = null;
         playBtn.SetActive(false);
         downloadBtn.SetActive(false);
 
-        if (!string.IsNullOrEmpty(data.download_link))
-            downloadBtn.SetActive(true);
-        else
+        if (string.IsNullOrEmpty(data.download_link))
+        {
+            // No download link - this game ships inside the app bundle itself.
             playBtn.SetActive(true);
+        }
+        else
+        {
+            string packageName = AndroidAppLauncher.ExtractPackageName(data.download_link);
+            if (AndroidAppLauncher.IsAppInstalled(packageName))
+            {
+                installedPackageName = packageName;
+                playBtn.SetActive(true);
+            }
+            else
+            {
+                downloadBtn.SetActive(true);
+            }
+        }
 
-            gameSelectedScreenObj.SetActive(true);
+        gameSelectedScreenObj.SetActive(true);
     }
 
     public void onPlayBtnClick()
     {
-
+        if (!string.IsNullOrEmpty(installedPackageName))
+        {
+            AndroidAppLauncher.LaunchApp(installedPackageName);
+        }
+        else
+        {
+            // Bundled game: hook up its in-app entry point here once defined.
+        }
     }
 
-    public void onDownloadBtnClick() 
+    public void onDownloadBtnClick()
     {
-
+        if (currentGameData != null && !string.IsNullOrEmpty(currentGameData.download_link))
+            Application.OpenURL(currentGameData.download_link);
     }
 }

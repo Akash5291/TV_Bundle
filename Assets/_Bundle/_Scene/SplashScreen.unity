@@ -130,6 +130,7 @@ GameObject:
   - component: {fileID: 266509044}
   - component: {fileID: 266509046}
   - component: {fileID: 266509045}
+  - component: {fileID: 499321733}
   m_Layer: 5
   m_Name: Logo_Animation
   m_TagString: Untagged
@@ -1650,3 +1651,18 @@ SceneRoots:
   - {fileID: 738280256}
   - {fileID: 1572636695}
   - {fileID: 1800492360}
+--- !u!114 &499321733
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 266509043}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2f994e5794c04b55b8676162c9a3a11f, type: 3}
+  m_Name:
+  m_EditorClassIdentifier:
+  logoImage: {fileID: 266509045}
+  duration: 0.8
+  startScale: 0.6
