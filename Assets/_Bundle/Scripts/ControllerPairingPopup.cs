@@ -12,6 +12,7 @@ public class ControllerPairingPopup : MonoBehaviour
     [SerializeField] GameObject firstSelected;
     [SerializeField] Image qrImage;
     [SerializeField] TMP_Text instructionsText;
+    [SerializeField] BackgroundFocusLock backgroundLock;
 
     GameObject previouslySelected;
 
@@ -26,6 +27,7 @@ public class ControllerPairingPopup : MonoBehaviour
 
         previouslySelected = EventSystem.current != null ? EventSystem.current.currentSelectedGameObject : null;
         popupRoot.SetActive(true);
+        backgroundLock?.SetLocked(true);
 
         var target = firstSelected != null ? firstSelected : popupRoot;
         EventSystem.current?.SetSelectedGameObject(target);
@@ -36,6 +38,7 @@ public class ControllerPairingPopup : MonoBehaviour
         if (popupRoot == null) return;
 
         popupRoot.SetActive(false);
+        backgroundLock?.SetLocked(false);
         EventSystem.current?.SetSelectedGameObject(previouslySelected);
     }
 

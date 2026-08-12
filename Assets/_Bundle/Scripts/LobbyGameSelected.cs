@@ -11,6 +11,7 @@ public class LobbyGameSelected : MonoBehaviour
     [SerializeField] TMP_Text gameDescription;
     [SerializeField] GameObject playBtn;
     [SerializeField] GameObject downloadBtn;
+    [SerializeField] BackgroundFocusLock backgroundLock;
 
     SerializableClasses.BundleGameData currentGameData;
     GameObject previouslySelected;
@@ -28,6 +29,7 @@ public class LobbyGameSelected : MonoBehaviour
     public void backFromGameSelected()
     {
         gameSelectedScreenObj.SetActive(false);
+        backgroundLock?.SetLocked(false);
         EventSystem.current?.SetSelectedGameObject(previouslySelected);
     }
 
@@ -49,6 +51,7 @@ public class LobbyGameSelected : MonoBehaviour
 
         previouslySelected = EventSystem.current != null ? EventSystem.current.currentSelectedGameObject : null;
         gameSelectedScreenObj.SetActive(true);
+        backgroundLock?.SetLocked(true);
         EventSystem.current?.SetSelectedGameObject(showPlay ? playBtn : downloadBtn);
     }
 

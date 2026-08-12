@@ -20,8 +20,9 @@ public static class AndroidAppLauncher
                 return true;
             }
         }
-        catch (AndroidJavaException)
+        catch (AndroidJavaException e)
         {
+            Debug.Log($"[AndroidAppLauncher] {packageName} not found: {e.Message}");
             return false;
         }
 #else
@@ -60,16 +61,22 @@ public static class AndroidAppLauncher
 
     // Play Store links look like https://play.google.com/store/apps/details?id=<package> -
     // pull the package name back out so it can be used with the package manager above.
-    public static string ExtractPackageName(string playStoreUrl)
+    // Falls back to treating the whole string as a bare package name if it doesn't
+    // look like a URL, in case the server sends that directly instead.
+    public static string ExtractPackageName(string downloadLink)
     {
-        if (string.IsNullOrEmpty(playStoreUrl)) return null;
+        if (string.IsNullOrEmpty(downloadLink)) return null;
 
         const string marker = "id=";
-        int idx = playStoreUrl.IndexOf(marker);
-        if (idx < 0) return null;
+        int idx = downloadLink.IndexOf(marker);
+        if (idx >= 0)
+        {
+            int start = idx + marker.Length;
+            int end = downloadLink.IndexOfAny(new[] { '&', '#' }, start);
+            return end < 0 ? downloadLink.Substring(start) : downloadLink.Substring(start, end - start);
+        }
 
-        int start = idx + marker.Length;
-        int end = playStoreUrl.IndexOfAny(new[] { '&', '#' }, start);
-        return end < 0 ? playStoreUrl.Substring(start) : playStoreUrl.Substring(start, end - start);
+        bool looksLikeBarePackageName = !downloadLink.Contains("://") && !downloadLink.Contains(" ") && downloadLink.Contains(".");
+        return looksLikeBarePackageName ? downloadLink.Trim() : null;
     }
 }

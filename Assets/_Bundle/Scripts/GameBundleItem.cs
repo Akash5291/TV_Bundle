@@ -20,6 +20,7 @@ public class GameBundleItem : MonoBehaviour
         {
             data.installedPackageName = AndroidAppLauncher.ExtractPackageName(data.download_link);
             data.isInstalled = AndroidAppLauncher.IsAppInstalled(data.installedPackageName);
+            Debug.Log($"[GameBundleItem] {data.title}: download_link='{data.download_link}' -> package='{data.installedPackageName}' installed={data.isInstalled}");
         }
     }
 
