@@ -305,7 +305,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   logoImage: {fileID: 266509045}
-  duration: 10
+  duration: 8
   startScale: 0.2
   easing:
     serializedVersion: 2
