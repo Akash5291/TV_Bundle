@@ -14,6 +14,11 @@ public class MyAndroidServer : MonoBehaviour
         //Debug.Log("My IP: " + _tcpServer._localIP);
     }
 
+    public void maxConnectionAllow(int n)
+    {
+        _tcpServer._maxConnections = n;
+    }
+
     public string GetMyIP()
     {
         return _tcpServer._localIP;
@@ -91,8 +96,13 @@ public class MyAndroidServer : MonoBehaviour
     {
         Debug.Log("OnDisconnect");
         _tcpServer.Disconnect();
+
         if (WifiManager.Instance.isClientConnected)
-            WifiManager.Instance.onClientDisconnected();
+        {
+            ConnectedIPs.Clear();// remove all connection ip list
+            WifiManager.Instance.isReady = 0;
+        }
+        serverClose();
     }
 
     // Send:
@@ -193,14 +203,24 @@ public class MyAndroidServer : MonoBehaviour
             WifiManager.Instance.isReady = 0;
         }
 
+        /*if (MyController.Instance.isCloseBtnPress)
+        {
+            MyController.Instance.sendMessage(StaticData.DisconnectAll, StaticData.DisconnectAll);
+            //Application.Quit();Akash
+            //System.Diagnostics.Process.GetCurrentProcess().Kill();
+        }
+        else if (WifiManager.Instance.isClientConnected)
+            WifiManager.Instance.onClientDisconnected();*/
+        serverClose();
+    }
+
+    void serverClose()
+    {
         if (MyController.Instance.isCloseBtnPress)
         {
             MyController.Instance.sendMessage(StaticData.DisconnectAll, StaticData.DisconnectAll);
-            Application.Quit();
-            System.Diagnostics.Process.GetCurrentProcess().Kill();
         }
-        else if (WifiManager.Instance.isClientConnected)
-            WifiManager.Instance.onClientDisconnected();
+        WifiManager.Instance.onClientDisconnected();
     }
 }
 

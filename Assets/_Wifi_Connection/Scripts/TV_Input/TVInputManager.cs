@@ -96,7 +96,7 @@ public class TVInputManager : MonoBehaviour
 
             if (Input.GetKeyDown(KeyCode.Escape))
             {
-                Application.Quit();
+                //Application.Quit();Akash
             }
         }
     }

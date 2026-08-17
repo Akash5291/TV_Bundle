@@ -6,7 +6,6 @@ public class ExitApp : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            Application.Quit();
             print("Quit app");
         }
     }

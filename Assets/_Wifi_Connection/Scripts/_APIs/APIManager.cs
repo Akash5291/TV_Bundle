@@ -28,9 +28,6 @@ public class APIManager : MonoBehaviour
     [SerializeField] GameObject Loading;
     public bool userPofileFound = false;
 
-    [Header("Instruction")]
-    public GameObject QRInstruction;
-
     [Header("Internet error")]
     [SerializeField] GameObject internetObj;
     [SerializeField] TMP_Text footerText;
@@ -57,22 +54,26 @@ public class APIManager : MonoBehaviour
     private void OnEnable()
     {
         e_qrController.onQREncodeFinished += qrEncodeFinished;//Add Finished Event
+        setURLs();
     }
 
-    private void OnDisable()
+    private void OnDestroy()
     {
         e_qrController.onQREncodeFinished -= qrEncodeFinished;//remove Finished Event
     }
 
     void Start()
     {
-        base_url = BundleAPIManager.Instance.base_url;
+        setupUUID();
+        LanguageSelector.Instance.onGetTranslatorText();
+    }
 
+    public void setURLs()
+    {
+        base_url = BundleAPIManager.Instance.base_url;
         getQRCode_URL = base_url + StaticData.getQRCode_URL;
         setServerIPURL = base_url + StaticData.setServerIPURL;
         getUserProfile_URL = base_url + StaticData.getUserProfile_URL;
-        setupUUID();
-        LanguageSelector.Instance.onGetTranslatorText();
     }
 
     void setupUUID()
@@ -86,7 +87,6 @@ public class APIManager : MonoBehaviour
             uuid = SystemInfo.deviceUniqueIdentifier;
             PlayerPrefs.SetString("UUID", uuid);
             OnGenerateQR(uuid);
-            InsertQRData();
         }
         else
         {
@@ -187,7 +187,7 @@ public class APIManager : MonoBehaviour
 #endregion
 
 #region InsertQRData_in_Server
-    void InsertQRData()
+    public void InsertQRData()
     {
         StartCoroutine(CheckInternetConnection(isConnected =>
         {
@@ -231,7 +231,7 @@ public class APIManager : MonoBehaviour
     }
 #endregion
 
-#region SetServerIP
+    #region SetServerIPToServer
     public void SetServerIP()
     {
         CancelInvoke();
@@ -264,7 +264,7 @@ public class APIManager : MonoBehaviour
 
         yield return request.SendWebRequest();
 
-        //Debug.Log("setServerIP Response: " + request.downloadHandler.text);
+        Debug.Log("setServerIP Response: " + request.downloadHandler.text);
         RaycastUnblock();
         //WifiManager.Instance.connectPlayerTxt.text = request.downloadHandler.text;
         if (request.result == UnityWebRequest.Result.ConnectionError)// || response.status.ToLower().Equals("fail"))

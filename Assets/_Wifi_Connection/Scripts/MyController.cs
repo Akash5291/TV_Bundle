@@ -47,21 +47,7 @@ public class MyController : MonoBehaviour
         if (Instance == null)
         {
             Instance = this;
-            DontDestroyOnLoad(gameObject);
         }
-        else if (Instance != this)
-        {
-            Destroy(gameObject);
-        }
-    }
-
-    private void Start()
-    {
-        Invoke("callServers", 3f);
-    }
-    void callServers()
-    {
-        onStartServers(true);
     }
 
     public void onStartServers(bool value)
@@ -72,7 +58,9 @@ public class MyController : MonoBehaviour
         webServer.transform.gameObject.SetActive(value);
         webServer.Connect();
 #else
+            isCloseBtnPress = false;
             androidServer.transform.gameObject.SetActive(value);
+            androidServer.maxConnectionAllow(BundleAPIManager.Instance.currentGame.numberOfPlayer);
             androidServer.Connect();
 #endif
             //APIManager.Instance.onCallInitApis();Akash
@@ -209,8 +197,9 @@ public class MyController : MonoBehaviour
 
                         isGameStart = true;
                         CancelInvoke("callGameID");
-                        APIManager.Instance.QRInstruction.SetActive(false);
-                        SceneManager.LoadScene(1);
+                        ActionContainer.onStartGame?.Invoke();
+                        //APIManager.Instance.QRInstruction.SetActive(false);
+                        //SceneManager.LoadScene(1);
                     }
                 }
             }
@@ -227,10 +216,7 @@ public class MyController : MonoBehaviour
             else if (string.Equals(controllerDataReceived.buttonName, StaticData.CloseBtn))
             {
                 Debug.Log("Close Application");
-                isCloseBtnPress = true;
-                isGameStart = false;
-                Application.Quit();
-                System.Diagnostics.Process.GetCurrentProcess().Kill();
+                backToGameLobby();
             }
             else
                 onGameButton?.Invoke(msg);
@@ -248,4 +234,10 @@ public class MyController : MonoBehaviour
         sendMessage("GameID", WifiManager.Instance.gameID);
     }
 
+    public void backToGameLobby()
+    {
+        isCloseBtnPress = true;
+        androidServer.Disconnect();
+        isGameStart = false;
+    }
 }

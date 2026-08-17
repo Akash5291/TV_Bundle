@@ -108,7 +108,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 54e9d6a4c9c748b58bdd74aecaadf92b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  selector: {fileID: 0}
+  selector: {fileID: 6379609757268380815}
   focusedScale: 1.08
   scaleSpeed: 12
 --- !u!114 &8747264191503381660
@@ -126,6 +126,8 @@ MonoBehaviour:
   gameBanner: {fileID: 5303286593204074720}
   gameItem:
     title: 
+    numberOfPlayer: 0
+    game_id: 
     description: 
     image_url: 
     download_link: 

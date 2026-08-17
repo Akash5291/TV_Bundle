@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 
 // Home is the app's landing screen with nowhere further back to go, so
 // pressing Back there should exit like a normal Android root activity.
@@ -27,7 +28,10 @@ public class AppExitOnBack : MonoBehaviour
         if (popupRoot != null && popupRoot.activeSelf) return;
         if (hamburgerManager != null && !hamburgerManager.IsHomeSection) return;
 
-        Quit();
+        if (SceneManager.GetActiveScene().buildIndex == 1)
+            Quit();
+        else
+            SceneManager.LoadSceneAsync("GameListing");
     }
 
     void Quit()

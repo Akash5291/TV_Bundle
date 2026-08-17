@@ -31,6 +31,9 @@ public class MenuController : MonoBehaviour
     int currentRow = 0;
     int currentClm = 0;
 
+    [Header("Game Specific")]
+    [SerializeField] Movement boatRuchMadnessMovement;
+
     private void Awake()
     {
         if (Instance == null)
@@ -47,7 +50,7 @@ public class MenuController : MonoBehaviour
         MyController.onGameButton += onGameButtonHit;
     }
 
-    private void OnDisable()
+    private void OnDestroy()
     {
         MyController.onNextButton -= onNext;
         MyController.onPreviousButton -= onPrevious;
@@ -59,10 +62,8 @@ public class MenuController : MonoBehaviour
 
     private void Start()
     {
-        if (SceneManager.GetActiveScene().buildIndex == 1)
+        if (SceneManager.GetActiveScene().name.Equals("BoatRushMadness"))
             onSetState(StaticData.Home);
-        else if (SceneManager.GetActiveScene().buildIndex > 1)// game mode
-            onSetState(StaticData.GameArea);
     }
 
     public void setAdsGameDownloadButton()
@@ -226,17 +227,22 @@ public class MenuController : MonoBehaviour
         {
             if (btnName.Equals(gameAreaBtn[i].name))
             {
-                /*if (!controllerDataReceived.isPointerUP && !btnName.Equals("Pause"))
-                    CarInput.Instance.ReleaseGasBrake();
-                else
+                if (btnName.Equals("BoostUp"))
                 {
-                    if (btnName.Equals("Speed"))
-                        CarInput.Instance.Gas();
-                    else if (btnName.Equals("Brake"))
-                        CarInput.Instance.Brake();
+                    if (controllerDataReceived.isPointerUP)
+                        boatRuchMadnessMovement.OnPointerDown(true);
                     else
-                        gameAreaBtn[i].onClick.Invoke();
-                }*/
+                        boatRuchMadnessMovement.OnPointerUp(true);
+                }
+                else if (btnName.Equals("BoostDown"))
+                {
+                    if (controllerDataReceived.isPointerUP)
+                        boatRuchMadnessMovement.OnPointerDown(false);
+                    else
+                        boatRuchMadnessMovement.OnPointerUp(false);
+                }
+                else
+                    gameAreaBtn[i].onClick.Invoke();
 
                 break;
             }

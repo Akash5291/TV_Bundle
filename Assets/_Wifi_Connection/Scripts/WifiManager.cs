@@ -62,7 +62,7 @@ public class WifiManager : MonoBehaviour
 #if UNITY_ANDROID
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            Application.Quit();
+            //Application.Quit();akash
         }
 #endif
     }
@@ -76,16 +76,16 @@ public class WifiManager : MonoBehaviour
         //BGMusic.Instance.pauseBGSond(false);
         MyController.Instance.sendMessage(StaticData.DisconnectAll, StaticData.DisconnectAll);
         Debug.Log("GameManager: Disconnect: " + MyController.Instance.isCloseBtnPress);
-        if (MyController.Instance.isCloseBtnPress)
+        /*if (MyController.Instance.isCloseBtnPress)Akash
         {
             Debug.Log("Quit close");
-            Application.Quit();
-            System.Diagnostics.Process.GetCurrentProcess().Kill();
+            ActionContainer.onQuitGame?.Invoke();
+            //Application.Quit();
+            //System.Diagnostics.Process.GetCurrentProcess().Kill();
         }
-        else
+        else*/
         {
             Debug.Log("normal disconnect");
-            APIManager.Instance.QRInstruction.SetActive(true);
             APIManager.Instance.UserProfileObj.SetActive(false);
 
             if (supportedPlayer == SupportedGamePlayer.Two)
@@ -95,8 +95,7 @@ public class WifiManager : MonoBehaviour
 
             APIManager.Instance.userPofileFound = false;
             MyController.Instance.onStartServers(false);
-            if (SceneManager.GetActiveScene().buildIndex != 0)
-                SceneManager.LoadScene(0);
+            ActionContainer.onClientDisconnected?.Invoke();
         }
     }
 
@@ -116,15 +115,13 @@ public class WifiManager : MonoBehaviour
 
         if (!isLevelGame)
         {
-            APIManager.Instance.QRInstruction.SetActive(false);
-            SceneManager.LoadSceneAsync(1);
+            ActionContainer.onStartGame?.Invoke();
         }
         else
         {
             if (APIManager.Instance.userPofileFound)
             {
-                APIManager.Instance.QRInstruction.SetActive(false);
-                SceneManager.LoadSceneAsync(1);
+                ActionContainer.onStartGame?.Invoke();
             }
             else
                 Invoke("onClientConnected", 1f);
@@ -137,7 +134,7 @@ public class WifiManager : MonoBehaviour
         if (!focus)
         {
             Debug.Log("background");
-            Application.Quit();
+            //Application.Quit();Akash
         }
         else
             Debug.Log("foreground");

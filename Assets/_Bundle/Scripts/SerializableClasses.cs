@@ -4,11 +4,21 @@ using System.Collections.Generic;
 public class SerializableClasses
 {
     //https://playwifigames.com/tv_bundle_games/bundle_game_list
+
+    [Serializable]
+    public class BundleGameSceneInfo
+    {
+        public string SceneName;
+        public string Game_Id; 
+    }
+
     #region Bundle Game Data
     [Serializable]
     public class BundleGameData
     {
         public string title;
+        public int numberOfPlayer;
+        public string game_id;
         public string description;
         public string image_url;
         public string download_link;

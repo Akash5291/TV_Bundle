@@ -15,7 +15,6 @@ public class BundleAPIManager : MonoBehaviour
 
     [SerializeField] GameObject Loading;
 
-
     [Header("Internet error")]
     [SerializeField] GameObject internetObj;
     [SerializeField] TMP_Text footerText;
@@ -26,6 +25,9 @@ public class BundleAPIManager : MonoBehaviour
     [Header("In-House Ads")]
     public InhouseAds inHouseAds;
 
+    [Header("Current Selected Game")]
+    public BundleGameData currentGame = null;
+
     int closeTime = 5;
 
     private void OnEnable()
@@ -33,7 +35,7 @@ public class BundleAPIManager : MonoBehaviour
         ActionContainer.onSplashScreenAnimComplete += onLoadGameLobby;
     }
 
-    private void OnDisable()
+    private void OnDestroy()
     {
         ActionContainer.onSplashScreenAnimComplete -= onLoadGameLobby;
     }
@@ -41,8 +43,14 @@ public class BundleAPIManager : MonoBehaviour
     private void Awake()
     {
         if (Instance == null)
+        {
             Instance = this;
-
+            DontDestroyOnLoad(gameObject);
+        }
+        else if (Instance != this)
+        {
+            Destroy(gameObject);
+        }
         PlayerPrefs.SetInt("AdsShown", PlayerPrefs.GetInt("AdsShown", 0));
     }
 
@@ -127,6 +135,7 @@ public class BundleAPIManager : MonoBehaviour
             TVURL tVURL = JsonUtility.FromJson<TVURL>(request.downloadHandler.text);
             base_url = tVURL.base_url;
 
+            //APIManager.Instance.setURLs();
             StartCoroutine(getGameBundleInfo());
         }
     }
@@ -188,5 +197,6 @@ public class BundleAPIManager : MonoBehaviour
     void jumpToGameLobby()
     {
         SceneManager.LoadScene(1);
+        currentGame = null;
     }
 }
