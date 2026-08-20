@@ -68,6 +68,8 @@ public class MenuController : MonoBehaviour
             onSetState(StaticData.Home);
         else if (SceneManager.GetActiveScene().name.Equals("Ninja_Knife_Main_Scene"))
             onSetState(StaticData.Home);
+        else if (SceneManager.GetActiveScene().name.Equals("Hill_Racer_Main_Menu"))
+            onSetState(StaticData.Home);
         else
             onSetState(StaticData.GameArea);
     }
@@ -134,7 +136,10 @@ public class MenuController : MonoBehaviour
             case "LevelFinish":
                 {
                     onSetCurrentButtonDetails(getScreenIndex(StaticData.LevelFinish), 0, 0);
-                    MyController.Instance.sendMessage(StaticData.LevelFinish, "");
+                    if (WifiManager.Instance.gameID.Equals(StaticData.HillRacer))
+                        MyController.Instance.sendMessage(StaticData.LevelFinish, GameManagerHillRacer.Instance.DistanceTXT.text);
+                    else
+                        MyController.Instance.sendMessage(StaticData.LevelFinish, "");
                 }
                 break;
             case "GameScene":
@@ -159,7 +164,10 @@ public class MenuController : MonoBehaviour
             case "GameOver":
                 {
                     onSetCurrentButtonDetails(getScreenIndex(StaticData.GameOver), 0, 0);
-                    MyController.Instance.sendMessage(StaticData.GameOver, "");
+                    if (WifiManager.Instance.gameID.Equals(StaticData.HillRacer))
+                        MyController.Instance.sendMessage(StaticData.GameOver, GameManagerHillRacer.Instance.DistanceTXT.text);
+                    else
+                        MyController.Instance.sendMessage(StaticData.GameOver, "");
                 }
                 break;
             case "Shop":
@@ -294,6 +302,20 @@ public class MenuController : MonoBehaviour
                                 boatRuchMadnessMovement.OnPointerDown(false);
                             else
                                 boatRuchMadnessMovement.OnPointerUp(false);
+                        }
+                    }
+                    else if (WifiManager.Instance.gameID.Equals(StaticData.HillRacer))
+                    {
+                        if (!controllerDataReceived.isPointerUP && !btnName.Equals("Pause"))
+                            CarInput.Instance.ReleaseGasBrake();
+                        else
+                        {
+                            if (btnName.Equals("Speed"))
+                                CarInput.Instance.Gas();
+                            else if (btnName.Equals("Brake"))
+                                CarInput.Instance.Brake();
+                            else
+                                gameAreaBtn[i].onClick.Invoke();
                         }
                     }
                     else

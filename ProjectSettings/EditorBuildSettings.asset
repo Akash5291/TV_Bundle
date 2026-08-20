@@ -29,6 +29,27 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/_Games/03_KnifeHit/Scene/Ninja_Knife_Game_Scene.unity
     guid: fa0cd6ab5cb82b64b9a6c48c3913471d
+  - enabled: 1
+    path: Assets/_Games/04_Hill_Racer/Scenes/Hill_Racer_Main_Menu.unity
+    guid: 3f6e172e1d3b26d42a487cff0d1a3983
+  - enabled: 1
+    path: Assets/_Games/04_Hill_Racer/Scenes/Hill_Racer_Level0.unity
+    guid: f5b8ff0d082db2447bbff86e5a19d24f
+  - enabled: 1
+    path: Assets/_Games/04_Hill_Racer/Scenes/Hill_Racer_Level1.unity
+    guid: 3fbbe454637b8884f8ecba868aa44db9
+  - enabled: 1
+    path: Assets/_Games/04_Hill_Racer/Scenes/Hill_Racer_Level2.unity
+    guid: e5f837c3732524544b94f95bfbec11b8
+  - enabled: 1
+    path: Assets/_Games/04_Hill_Racer/Scenes/Hill_Racer_Level3.unity
+    guid: ba6cf5b8aaf7145439ed5f4ec0a28ac2
+  - enabled: 1
+    path: Assets/_Games/04_Hill_Racer/Scenes/Hill_Racer_Level4.unity
+    guid: 3f2b096855ba8c64692123b625373598
+  - enabled: 1
+    path: Assets/_Games/04_Hill_Racer/Scenes/Hill_Racer_Level5.unity
+    guid: 2cebb3c9573b5a24d84a37b94e397944
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 289c1b55c9541489481df5cc06664110, type: 3}
   m_UseUCBPForAssetBundles: 0
