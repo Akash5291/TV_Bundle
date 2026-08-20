@@ -1,7 +1,15 @@
+using System.CodeDom;
 using UnityEngine;
 
 public class StaticData
 {
+    [Header("Bundle Game Ids")]
+    public const string Ludo = "";
+    public const string NinjaKnife = "nbtest_nk_16";
+    public const string RobotRun = "nbtest_rr_15";
+    public const string BoatRushMadness = "nbtest_bm_5";
+    public const string HillRacer = "nbtest_hr_6";
+
     [Header("API data file")]
     public const string bundleData_URL = "tv_bundle_games/bundle_game_list";
     public const string getQRCode_URL = "matchuser_id.php";

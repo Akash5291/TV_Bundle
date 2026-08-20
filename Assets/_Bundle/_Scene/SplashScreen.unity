@@ -1258,10 +1258,12 @@ MonoBehaviour:
   gameSceneInfo:
   - SceneName: BoatRushMadness
     Game_Id: nbtest_bm_5
-  - SceneName: NinjaKinfe
+  - SceneName: Ninja_Knife_Main_Scene
     Game_Id: nbtest_nk_16
   - SceneName: Robot_Run_Main_Menu
     Game_Id: nbtest_rr_15
+  - SceneName: Hill_Racer
+    Game_Id: nbtest_hr_6
 --- !u!1 &1930241589
 GameObject:
   m_ObjectHideFlags: 0

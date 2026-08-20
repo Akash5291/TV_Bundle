@@ -66,6 +66,8 @@ public class MenuController : MonoBehaviour
             onSetState(StaticData.Home);
         else if (SceneManager.GetActiveScene().name.Equals("Robot_Run_Main_Menu"))
             onSetState(StaticData.Home);
+        else if (SceneManager.GetActiveScene().name.Equals("Ninja_Knife_Main_Scene"))
+            onSetState(StaticData.Home);
         else
             onSetState(StaticData.GameArea);
     }
@@ -108,7 +110,11 @@ public class MenuController : MonoBehaviour
             case "Home":
                 {
                     //BGMusic.Instance.pauseBGSond(false);
-                    onSetCurrentButtonDetails(getScreenIndex(StaticData.Home), 0, 0);// parameters = screenName, btn default row index, btn default column index
+                    if (WifiManager.Instance.gameID.Equals(StaticData.NinjaKnife))
+                        onSetCurrentButtonDetails(getScreenIndex(StaticData.Home), 0, 1);// parameters = screenName, btn default row index, btn default column index
+                    else
+                        onSetCurrentButtonDetails(getScreenIndex(StaticData.Home), 0, 0);// parameters = screenName, btn default row index, btn default column index
+
                     if (MyController.Instance.isGameStart)
                         MyController.Instance.sendMessage(StaticData.Home, StaticData.Home);
                 }
@@ -154,6 +160,28 @@ public class MenuController : MonoBehaviour
                 {
                     onSetCurrentButtonDetails(getScreenIndex(StaticData.GameOver), 0, 0);
                     MyController.Instance.sendMessage(StaticData.GameOver, "");
+                }
+                break;
+            case "Shop":
+                {
+                    if (WifiManager.Instance.gameID.Equals(StaticData.NinjaKnife))
+                        onSetCurrentButtonDetails(getScreenIndex(StaticData.ShopScreen), 1, 0);
+                    else
+                        onSetCurrentButtonDetails(getScreenIndex(StaticData.ShopScreen), 1, 0);
+
+                    MyController.Instance.sendMessage(StaticData.ShopScreen, "");
+                }
+                break;
+            case "Wheel":
+                {
+                    onSetCurrentButtonDetails(getScreenIndex(StaticData.SpinWheel), 1, 0);
+                    MyController.Instance.sendMessage(StaticData.SpinWheel, StaticData.SpinWheel);
+                }
+                break;
+            case "WheelFinish":
+                {
+                    onSetCurrentButtonDetails(getScreenIndex(StaticData.SpinWheelFinish), 0, 0);
+                    MyController.Instance.sendMessage(StaticData.SpinWheelFinish, StaticData.SpinWheelFinish);
                 }
                 break;
         }
@@ -229,12 +257,18 @@ public class MenuController : MonoBehaviour
 
         if (btnName.Equals(StaticData.LongTap))
         {
-            #region For RobotRun
-            if (!controllerDataReceived.isPointerUP)
-                PlayerMovement.Instance.B_PointerDown();
-            else
-                PlayerMovement.Instance.B_PointerUp();
-            #endregion
+            if (WifiManager.Instance.gameID.Equals(StaticData.RobotRun))
+            {
+                if (!controllerDataReceived.isPointerUP)
+                    PlayerMovement.Instance.B_PointerDown();
+                else
+                    PlayerMovement.Instance.B_PointerUp();
+            }
+        }
+        else if (btnName.Equals(StaticData.TapBtn))
+        {
+            if (WifiManager.Instance.gameID.Equals(StaticData.NinjaKnife))
+                GamePlayManagerNinjaKnife.instance.OnKnifeThrow();
         }
         else
         {
@@ -244,17 +278,23 @@ public class MenuController : MonoBehaviour
                 {
                     if (btnName.Equals("BoostUp"))
                     {
-                        if (controllerDataReceived.isPointerUP)
-                            boatRuchMadnessMovement.OnPointerDown(true);
-                        else
-                            boatRuchMadnessMovement.OnPointerUp(true);
+                        if (WifiManager.Instance.gameID.Equals(StaticData.BoatRushMadness))
+                        {
+                            if (controllerDataReceived.isPointerUP)
+                                boatRuchMadnessMovement.OnPointerDown(true);
+                            else
+                                boatRuchMadnessMovement.OnPointerUp(true);
+                        }
                     }
                     else if (btnName.Equals("BoostDown"))
                     {
-                        if (controllerDataReceived.isPointerUP)
-                            boatRuchMadnessMovement.OnPointerDown(false);
-                        else
-                            boatRuchMadnessMovement.OnPointerUp(false);
+                        if (WifiManager.Instance.gameID.Equals(StaticData.BoatRushMadness))
+                        {
+                            if (controllerDataReceived.isPointerUP)
+                                boatRuchMadnessMovement.OnPointerDown(false);
+                            else
+                                boatRuchMadnessMovement.OnPointerUp(false);
+                        }
                     }
                     else
                         gameAreaBtn[i].onClick.Invoke();
