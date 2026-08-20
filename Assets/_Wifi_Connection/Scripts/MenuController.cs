@@ -64,6 +64,10 @@ public class MenuController : MonoBehaviour
     {
         if (SceneManager.GetActiveScene().name.Equals("BoatRushMadness"))
             onSetState(StaticData.Home);
+        else if (SceneManager.GetActiveScene().name.Equals("Robot_Run_Main_Menu"))
+            onSetState(StaticData.Home);
+        else
+            onSetState(StaticData.GameArea);
     }
 
     public void setAdsGameDownloadButton()
@@ -223,28 +227,40 @@ public class MenuController : MonoBehaviour
         string btnName = controllerDataReceived.buttonName;
         Debug.Log("Button Name: " + btnName);
 
-        for (int i = 0; i < gameAreaBtn.Length; i++)
+        if (btnName.Equals(StaticData.LongTap))
         {
-            if (btnName.Equals(gameAreaBtn[i].name))
+            #region For RobotRun
+            if (!controllerDataReceived.isPointerUP)
+                PlayerMovement.Instance.B_PointerDown();
+            else
+                PlayerMovement.Instance.B_PointerUp();
+            #endregion
+        }
+        else
+        {
+            for (int i = 0; i < gameAreaBtn.Length; i++)
             {
-                if (btnName.Equals("BoostUp"))
+                if (btnName.Equals(gameAreaBtn[i].name))
                 {
-                    if (controllerDataReceived.isPointerUP)
-                        boatRuchMadnessMovement.OnPointerDown(true);
+                    if (btnName.Equals("BoostUp"))
+                    {
+                        if (controllerDataReceived.isPointerUP)
+                            boatRuchMadnessMovement.OnPointerDown(true);
+                        else
+                            boatRuchMadnessMovement.OnPointerUp(true);
+                    }
+                    else if (btnName.Equals("BoostDown"))
+                    {
+                        if (controllerDataReceived.isPointerUP)
+                            boatRuchMadnessMovement.OnPointerDown(false);
+                        else
+                            boatRuchMadnessMovement.OnPointerUp(false);
+                    }
                     else
-                        boatRuchMadnessMovement.OnPointerUp(true);
-                }
-                else if (btnName.Equals("BoostDown"))
-                {
-                    if (controllerDataReceived.isPointerUP)
-                        boatRuchMadnessMovement.OnPointerDown(false);
-                    else
-                        boatRuchMadnessMovement.OnPointerUp(false);
-                }
-                else
-                    gameAreaBtn[i].onClick.Invoke();
+                        gameAreaBtn[i].onClick.Invoke();
 
-                break;
+                    break;
+                }
             }
         }
     }

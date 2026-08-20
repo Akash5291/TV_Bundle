@@ -55,6 +55,13 @@ public class MyAndroidServer : MonoBehaviour
     {
         if (!isAlreadyConnected(ip))
         {
+            for (int i = 0; i < ConnectedIPs.Count; i++)
+            {
+                if (string.IsNullOrEmpty(ConnectedIPs[i].ip))
+                {
+                    ConnectedIPs.RemoveAt(i);
+                }
+            }
             Debug.Log("addNewConnection: " + ip);
             ConnectedPlayer p = new ConnectedPlayer();
             p.id = ConnectedIPs.Count + 1;

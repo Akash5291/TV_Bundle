@@ -17,6 +17,12 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/_Games/01_BoatRushMadness/Scenes/BoatRushMadness.unity
     guid: 2cda990e2423bbf4892e6590ba056729
+  - enabled: 1
+    path: Assets/_Games/02_RobotRun/Scenes/Robot_Run_Main_Menu.unity
+    guid: fa1973580ce1b8d4fab38f524f9e43c5
+  - enabled: 1
+    path: Assets/_Games/02_RobotRun/Scenes/Robot_Run_Gameplay.unity
+    guid: c3b341fadefd27f4f9a109a2b398a9f2
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 289c1b55c9541489481df5cc06664110, type: 3}
   m_UseUCBPForAssetBundles: 0
