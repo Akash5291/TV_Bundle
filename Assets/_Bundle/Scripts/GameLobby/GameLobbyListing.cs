@@ -10,6 +10,7 @@ public class GameLobbyListing : MonoBehaviour
 
     [Header("Feature Game")]
     [SerializeField] Image featureGameImage;
+    [SerializeField] TMP_Text featureGameGreating;
     [SerializeField] TMP_Text featureGameTitle;
     [SerializeField] TMP_Text featureGameDescription;
 
@@ -22,6 +23,8 @@ public class GameLobbyListing : MonoBehaviour
     [Header("Common Items")]
     [SerializeField] GameObject gameListingObj;
 
+    int downloadCount = 0;
+
     void Start()
     {
         inItSetup();
@@ -29,6 +32,7 @@ public class GameLobbyListing : MonoBehaviour
 
     void inItSetup()
     {
+        downloadCount = 0;
         StartCoroutine(DownloadFeatureImage(BundleAPIManager.Instance.gameBundleData.feature_game.image_url));
         featureGameTitle.text = BundleAPIManager.Instance.gameBundleData.feature_game.title;
         featureGameDescription.text = BundleAPIManager.Instance.gameBundleData.feature_game.description;
@@ -56,7 +60,9 @@ public class GameLobbyListing : MonoBehaviour
         if (www.result != UnityWebRequest.Result.Success)
         {
             Debug.LogError("Failed to download bundle game icon: " + www.error);
-            StartCoroutine(DownloadFeatureImage(imageUrl));
+            downloadCount += 1;
+            if (downloadCount < 3)
+                StartCoroutine(DownloadFeatureImage(imageUrl));
         }
         else
         {
@@ -72,5 +78,8 @@ public class GameLobbyListing : MonoBehaviour
         }
     }
 
-   
+   public void onFeatureGameSelected()
+    {
+        ActionContainer.onGameSelectToPlay?.Invoke(featureGameImage.sprite, BundleAPIManager.Instance.gameBundleData.feature_game);
+    }
 }

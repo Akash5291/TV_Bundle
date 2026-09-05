@@ -10,10 +10,8 @@ Texture2D:
   m_ImageContentsHash:
     serializedVersion: 2
     Hash: 00000000000000000000000000000000
-  m_ForcedFallbackFormat: 4
-  m_DownscaleFallback: 0
   m_IsAlphaChannelOptional: 0
-  serializedVersion: 2
+  serializedVersion: 4
   m_Width: 1024
   m_Height: 1024
   m_CompleteImageSize: 1048576
@@ -60,14 +58,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 71c1514a6bd24e1e882cebbe1904ce04, type: 3}
   m_Name: Arabic_Font SDF
   m_EditorClassIdentifier: 
-  hashCode: 0
-  material: {fileID: 7008601574631645938}
-  materialHashCode: 0
   m_Version: 1.1.0
-  m_SourceFontFileGUID: e321d1c29ce60c44094d40998dd19db5
-  m_SourceFontFile_EditorRef: {fileID: 12800000, guid: e321d1c29ce60c44094d40998dd19db5, type: 3}
-  m_SourceFontFile: {fileID: 0}
-  m_AtlasPopulationMode: 0
   m_FaceInfo:
     m_FaceIndex: 0
     m_FamilyName: Noto Sans Arabic
@@ -90,6 +81,50 @@ MonoBehaviour:
     m_StrikethroughOffset: 16.4
     m_StrikethroughThickness: 3.8
     m_TabWidth: 20
+  m_Material: {fileID: 7008601574631645938}
+  m_SourceFontFileGUID: e321d1c29ce60c44094d40998dd19db5
+  m_CreationSettings:
+    sourceFontFileName: 
+    sourceFontFileGUID: e321d1c29ce60c44094d40998dd19db5
+    faceIndex: 0
+    pointSizeSamplingMode: 1
+    pointSize: 76
+    padding: 10
+    paddingMode: 0
+    packingMode: 4
+    atlasWidth: 1024
+    atlasHeight: 1024
+    characterSetSelectionMode: 7
+    characterSequence: "\u0627\u0644\u062E\u0637\u0648\u0629 1\r\n              
+      \t\t\u0642\u0645 \u0628\u062A\u0646\u0632\u064A\u0644 \u062A\u062D\u0643\u0645
+      nexbox \u0639\u0644\u0649 \u0627\u0644\u0647\u0627\u062A\u0641 \u0627\u0644\u0645\u062D\u0645\u0648\u0644\r\n              
+      \t\t\u0642\u0645 \u0628\u0632\u064A\u0627\u0631\u0629: www.nexboxgames.com/download\r\n               
+      \u0623\u0648 \u0627\u0628\u062D\u062B \u0639\u0646 \"nexbox controller\" \u0641\u064A
+      Play Store / App Store\r\n                \u0645\u062A\u0648\u0627\u0641\u0642
+      \u0641\u0642\u0637 \u0645\u0639 Neuplay Ventures LLP / nexbox game \u0639\u0644\u0649
+      \u0627\u0644\u062A\u0644\u0641\u0632\u064A\u0648\u0646\r\n               \t\t\u0627\u0644\u062E\u0637\u0648\u0629
+      2\r\n                \t\u0645\u0633\u062D \u0636\u0648\u0626\u064A \u0648\u0627\u062A\u0635\u0627\u0644\r\n               
+      \t\u062A\u0623\u0643\u062F \u0645\u0646 \u0623\u0646 \u0627\u0644\u062A\u0644\u0641\u0632\u064A\u0648\u0646
+      \u0648\u0627\u0644\u0647\u0627\u062A\u0641 \u0627\u0644\u0645\u062D\u0645\u0648\u0644
+      \u0639\u0644\u0649 \u0646\u0641\u0633 \u0634\u0628\u0643\u0629 Wi-Fi\r\n               
+      \u0627\u0641\u062A\u062D \u062A\u0637\u0628\u064A\u0642 nexbox controller\r\n               
+      \u0627\u0636\u063A\u0637 \u0639\u0644\u0649 \"\u0645\u0633\u062D \u0631\u0645\u0632
+      QR\" \u0641\u064A \u0648\u062D\u062F\u0629 \u0627\u0644\u062A\u062D\u0643\u0645\r\n               
+      \t\u0648\u062C\u0647\u0647 \u0625\u0644\u0649 \u0631\u0645\u0632 QR \u0623\u062F\u0646\u0627\u0647\r\n              
+      \t \t\u0633\u062A\u0642\u062A\u0631\u0646 \u0627\u0644\u0644\u0639\u0628\u0629
+      \u0648\u0648\u062D\u062F\u0629 \u0627\u0644\u062A\u062D\u0643\u0645 \u062A\u0644\u0642\u0627\u0626\u064A\u0627\u064B
+      \u0641\u064A \u063A\u0636\u0648\u0646 30 \u062B\u0627\u0646\u064A\u0629 \u0643\u062D\u062F
+      \u0623\u0642\u0635\u0649"
+    referencedFontAssetGUID: 
+    referencedTextAssetGUID: 
+    fontStyle: 0
+    fontStyleModifier: 0
+    renderMode: 4165
+    includeFontFeatures: 0
+  m_SourceFontFile: {fileID: 0}
+  m_SourceFontFilePath: 
+  m_AtlasPopulationMode: 0
+  InternalDynamicOS: 0
   m_GlyphTable:
   - m_Index: 2
     m_Metrics:
@@ -1464,7 +1499,12 @@ MonoBehaviour:
   - {fileID: -1307226318213083218}
   m_AtlasTextureIndex: 0
   m_IsMultiAtlasTexturesEnabled: 0
+  m_GetFontFeatures: 1
   m_ClearDynamicDataOnBuild: 0
+  m_AtlasWidth: 1024
+  m_AtlasHeight: 1024
+  m_AtlasPadding: 10
+  m_AtlasRenderMode: 4165
   m_UsedGlyphRects:
   - m_X: 0
     m_Y: 0
@@ -1995,76 +2035,14 @@ MonoBehaviour:
     m_Y: 285
     m_Width: 56
     m_Height: 738
-  m_fontInfo:
-    Name: 
-    PointSize: 0
-    Scale: 0
-    CharacterCount: 0
-    LineHeight: 0
-    Baseline: 0
-    Ascender: 0
-    CapHeight: 0
-    Descender: 0
-    CenterLine: 0
-    SuperscriptOffset: 0
-    SubscriptOffset: 0
-    SubSize: 0
-    Underline: 0
-    UnderlineThickness: 0
-    strikethrough: 0
-    strikethroughThickness: 0
-    TabWidth: 0
-    Padding: 0
-    AtlasWidth: 0
-    AtlasHeight: 0
-  atlas: {fileID: 0}
-  m_AtlasWidth: 1024
-  m_AtlasHeight: 1024
-  m_AtlasPadding: 10
-  m_AtlasRenderMode: 4165
-  m_glyphInfoList: []
-  m_KerningTable:
-    kerningPairs: []
   m_FontFeatureTable:
+    m_MultipleSubstitutionRecords: []
+    m_LigatureSubstitutionRecords: []
     m_GlyphPairAdjustmentRecords: []
-  fallbackFontAssets: []
+    m_MarkToBaseAdjustmentRecords: []
+    m_MarkToMarkAdjustmentRecords: []
+  m_ShouldReimportFontFeatures: 0
   m_FallbackFontAssetTable: []
-  m_CreationSettings:
-    sourceFontFileName: 
-    sourceFontFileGUID: e321d1c29ce60c44094d40998dd19db5
-    pointSizeSamplingMode: 1
-    pointSize: 76
-    padding: 10
-    packingMode: 4
-    atlasWidth: 1024
-    atlasHeight: 1024
-    characterSetSelectionMode: 7
-    characterSequence: "\u0627\u0644\u062E\u0637\u0648\u0629 1\r\n              
-      \t\t\u0642\u0645 \u0628\u062A\u0646\u0632\u064A\u0644 \u062A\u062D\u0643\u0645
-      nexbox \u0639\u0644\u0649 \u0627\u0644\u0647\u0627\u062A\u0641 \u0627\u0644\u0645\u062D\u0645\u0648\u0644\r\n              
-      \t\t\u0642\u0645 \u0628\u0632\u064A\u0627\u0631\u0629: www.nexboxgames.com/download\r\n               
-      \u0623\u0648 \u0627\u0628\u062D\u062B \u0639\u0646 \"nexbox controller\" \u0641\u064A
-      Play Store / App Store\r\n                \u0645\u062A\u0648\u0627\u0641\u0642
-      \u0641\u0642\u0637 \u0645\u0639 Neuplay Ventures LLP / nexbox game \u0639\u0644\u0649
-      \u0627\u0644\u062A\u0644\u0641\u0632\u064A\u0648\u0646\r\n               \t\t\u0627\u0644\u062E\u0637\u0648\u0629
-      2\r\n                \t\u0645\u0633\u062D \u0636\u0648\u0626\u064A \u0648\u0627\u062A\u0635\u0627\u0644\r\n               
-      \t\u062A\u0623\u0643\u062F \u0645\u0646 \u0623\u0646 \u0627\u0644\u062A\u0644\u0641\u0632\u064A\u0648\u0646
-      \u0648\u0627\u0644\u0647\u0627\u062A\u0641 \u0627\u0644\u0645\u062D\u0645\u0648\u0644
-      \u0639\u0644\u0649 \u0646\u0641\u0633 \u0634\u0628\u0643\u0629 Wi-Fi\r\n               
-      \u0627\u0641\u062A\u062D \u062A\u0637\u0628\u064A\u0642 nexbox controller\r\n               
-      \u0627\u0636\u063A\u0637 \u0639\u0644\u0649 \"\u0645\u0633\u062D \u0631\u0645\u0632
-      QR\" \u0641\u064A \u0648\u062D\u062F\u0629 \u0627\u0644\u062A\u062D\u0643\u0645\r\n               
-      \t\u0648\u062C\u0647\u0647 \u0625\u0644\u0649 \u0631\u0645\u0632 QR \u0623\u062F\u0646\u0627\u0647\r\n              
-      \t \t\u0633\u062A\u0642\u062A\u0631\u0646 \u0627\u0644\u0644\u0639\u0628\u0629
-      \u0648\u0648\u062D\u062F\u0629 \u0627\u0644\u062A\u062D\u0643\u0645 \u062A\u0644\u0642\u0627\u0626\u064A\u0627\u064B
-      \u0641\u064A \u063A\u0636\u0648\u0646 30 \u062B\u0627\u0646\u064A\u0629 \u0643\u062D\u062F
-      \u0623\u0642\u0635\u0649"
-    referencedFontAssetGUID: 
-    referencedTextAssetGUID: 
-    fontStyle: 0
-    fontStyleModifier: 0
-    renderMode: 4165
-    includeFontFeatures: 0
   m_FontWeightTable:
   - regularTypeface: {fileID: 0}
     italicTypeface: {fileID: 0}
@@ -2093,6 +2071,33 @@ MonoBehaviour:
   boldSpacing: 7
   italicStyle: 35
   tabSize: 10
+  m_fontInfo:
+    Name: 
+    PointSize: 0
+    Scale: 0
+    CharacterCount: 0
+    LineHeight: 0
+    Baseline: 0
+    Ascender: 0
+    CapHeight: 0
+    Descender: 0
+    CenterLine: 0
+    SuperscriptOffset: 0
+    SubscriptOffset: 0
+    SubSize: 0
+    Underline: 0
+    UnderlineThickness: 0
+    strikethrough: 0
+    strikethroughThickness: 0
+    TabWidth: 0
+    Padding: 0
+    AtlasWidth: 0
+    AtlasHeight: 0
+  m_glyphInfoList: []
+  m_KerningTable:
+    kerningPairs: []
+  fallbackFontAssets: []
+  atlas: {fileID: 0}
 --- !u!21 &7008601574631645938
 Material:
   serializedVersion: 8
@@ -2166,9 +2171,9 @@ Material:
     - _OutlineWidth: 0
     - _PerspectiveFilter: 0.875
     - _Reflectivity: 10
-    - _ScaleRatioA: 1
-    - _ScaleRatioB: 1
-    - _ScaleRatioC: 1
+    - _ScaleRatioA: 0.90909094
+    - _ScaleRatioB: 0.7386364
+    - _ScaleRatioC: 0.7386364
     - _ScaleX: 1
     - _ScaleY: 1
     - _ShaderFlags: 0
@@ -2201,3 +2206,4 @@ Material:
     - _SpecularColor: {r: 1, g: 1, b: 1, a: 1}
     - _UnderlayColor: {r: 0, g: 0, b: 0, a: 0.5}
   m_BuildTextureStacks: []
+  m_AllowLocking: 1

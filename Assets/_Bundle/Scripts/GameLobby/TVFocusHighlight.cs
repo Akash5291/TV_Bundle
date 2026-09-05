@@ -40,6 +40,7 @@ public class TVFocusHighlight : MonoBehaviour, ISelectHandler, IDeselectHandler,
     {
         if (selector != null) selector.SetActive(true);
         targetScale = baseScale * focusedScale;
+        EventSystem.current?.SetSelectedGameObject(gameObject);
     }
 
     public void OnDeselect(BaseEventData eventData)
@@ -50,6 +51,6 @@ public class TVFocusHighlight : MonoBehaviour, ISelectHandler, IDeselectHandler,
 
     public void OnPointerEnter(PointerEventData eventData)
     {
-        EventSystem.current?.SetSelectedGameObject(gameObject);
+        //EventSystem.current?.SetSelectedGameObject(gameObject);
     }
 }

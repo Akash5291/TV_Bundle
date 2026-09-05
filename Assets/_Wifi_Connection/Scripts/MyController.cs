@@ -236,6 +236,7 @@ public class MyController : MonoBehaviour
 
     public void backToGameLobby()
     {
+        Debug.Log("backToGameLobby");
         isCloseBtnPress = true;
         androidServer.Disconnect();
         isGameStart = false;

@@ -8,9 +8,12 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/_Bundle/_Scene/SplashScreen.unity
     guid: 9193641f2dc4f574291b6ff6c77ddd34
-  - enabled: 1
+  - enabled: 0
     path: Assets/_Bundle/_Scene/GameListing.unity
     guid: b6a384032b4b17f45ac4ba1dca49020a
+  - enabled: 1
+    path: Assets/_Bundle/_Scene/GameListing_New.unity
+    guid: ec6bab77d0d9f6f498d7251776d992d5
   - enabled: 1
     path: Assets/_Wifi_Connection/Scene/GamePairingScreen.unity
     guid: d36c79f3885df4276ab233314cac8fd9
@@ -50,6 +53,12 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/_Games/04_Hill_Racer/Scenes/Hill_Racer_Level5.unity
     guid: 2cebb3c9573b5a24d84a37b94e397944
+  - enabled: 1
+    path: Assets/_Games/05_Ludo/Scenes/Ludo_Home.unity
+    guid: 9fc0d4010bbf28b4594072e72b8655ab
+  - enabled: 1
+    path: Assets/_Games/05_Ludo/Scenes/Ludo_Game.unity
+    guid: 780bc8133e78e5540b0825bb2b9b8fac
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 289c1b55c9541489481df5cc06664110, type: 3}
   m_UseUCBPForAssetBundles: 0

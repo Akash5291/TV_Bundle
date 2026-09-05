@@ -4,7 +4,7 @@ using UnityEngine;
 public class StaticData
 {
     [Header("Bundle Game Ids")]
-    public const string Ludo = "";
+    public const string Ludo = "nbtest_ludo_28";
     public const string NinjaKnife = "nbtest_nk_16";
     public const string RobotRun = "nbtest_rr_15";
     public const string BoatRushMadness = "nbtest_bm_5";
@@ -33,6 +33,7 @@ public class StaticData
     public const string LevelUp = "LevelUp";
     public const string Tutorial = "Tutorial";
     public const string DisconnectAll = "Disconnect";
+    public const string LoadingScreen = "Loading";
 
     [Header("Browsing UI")]
     public const string CloseBtn = "close";

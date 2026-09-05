@@ -38,39 +38,6 @@ public class HamburgerManager : MonoBehaviour
         }
     }
 
-    void Update()
-    {
-        //UpdateSidebarWidth();
-        UpdateActiveSectionFromFocus();
-    }
-
-    void UpdateSidebarWidth()
-    {
-        if (sidebar == null) return;
-
-        float targetWidth = IsSidebarFocused() ? expandedWidth : collapsedWidth;
-        var size = sidebar.sizeDelta;
-        size.x = Mathf.Lerp(size.x, targetWidth, Time.unscaledDeltaTime * resizeSpeed);
-        sidebar.sizeDelta = size;
-    }
-
-    void UpdateActiveSectionFromFocus()
-    {
-        if (EventSystem.current == null) return;
-        var selected = EventSystem.current.currentSelectedGameObject;
-        if (selected == null) return;
-
-        for (int i = 0; i < sections.Length; i++)
-        {
-            var button = sections[i].menuButton;
-            if (button != null && button.gameObject == selected && i != activeIndex)
-            {
-                SelectSection(i);
-                break;
-            }
-        }
-    }
-
     bool IsSidebarFocused()
     {
         if (EventSystem.current == null || sidebar == null) return false;

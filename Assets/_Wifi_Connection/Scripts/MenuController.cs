@@ -70,6 +70,8 @@ public class MenuController : MonoBehaviour
             onSetState(StaticData.Home);
         else if (SceneManager.GetActiveScene().name.Equals("Hill_Racer_Main_Menu"))
             onSetState(StaticData.Home);
+        else if (SceneManager.GetActiveScene().name.Equals("Ludo_Home"))
+            onSetState(StaticData.Home);
         else
             onSetState(StaticData.GameArea);
     }
@@ -123,7 +125,11 @@ public class MenuController : MonoBehaviour
                 break;
             case "Selection":
                 {
-                    onSetCurrentButtonDetails(getScreenIndex(StaticData.SelectionScreen), 0, 0);
+                    if (WifiManager.Instance.gameID.Equals(StaticData.Ludo))
+                        onSetCurrentButtonDetails(getScreenIndex(StaticData.SelectionScreen), 1, 0);
+                    else
+                        onSetCurrentButtonDetails(getScreenIndex(StaticData.SelectionScreen), 0, 0);
+
                     MyController.Instance.sendMessage(StaticData.SelectionScreen, StaticData.SelectionScreen);
                 }
                 break;
@@ -157,7 +163,11 @@ public class MenuController : MonoBehaviour
                 break;
             case "Level":
                 {
-                    onSetCurrentButtonDetails(getScreenIndex(StaticData.LevelScreen), 0, 0);
+                    if (WifiManager.Instance.gameID.Equals(StaticData.Ludo))
+                        onSetCurrentButtonDetails(getScreenIndex(StaticData.LevelScreen), 1, 0);
+                    else
+                        onSetCurrentButtonDetails(getScreenIndex(StaticData.LevelScreen), 0, 0);
+
                     MyController.Instance.sendMessage(StaticData.LevelScreen, "");
                 }
                 break;

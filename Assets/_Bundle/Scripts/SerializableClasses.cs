@@ -21,6 +21,9 @@ public class SerializableClasses
         public string game_id;
         public string description;
         public string image_url;
+        public string ss_1;
+        public string ss_2;
+        public string ss_3;
         public string download_link;
 
         // Resolved locally at list-setup time (see GameBundleItem) - not part

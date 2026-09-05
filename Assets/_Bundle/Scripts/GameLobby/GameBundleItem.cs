@@ -1,4 +1,5 @@
 using System.Collections;
+using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.Networking;
@@ -7,12 +8,14 @@ using static SerializableClasses;
 
 public class GameBundleItem : MonoBehaviour
 {
+    [SerializeField] TMP_Text gameName;
     [SerializeField] Image gameBanner;
     [SerializeField] BundleGameData gameItem;
 
     public void setGameBundleData(BundleGameData data)
     {
         gameItem = data;
+        gameName.text = data.title;
         StartCoroutine(DownloadAndSetImage(data.image_url));
 
         // Resolve install status once up front, rather than re-checking every

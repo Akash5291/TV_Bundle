@@ -26,22 +26,7 @@ public class GeneralFunction : MonoBehaviour {
 			GeneralFunction.intance.appleLbl.text = GameManagerNinjaKnife.Apple + "";
 		}
 	}
-	void Update()
-	{
-		if (Input.GetKeyUp (KeyCode.Escape)) {
-				if((Time.time-EscTime) < 3f)
-				{
-					Application.Quit ();
-				}
-				else 
-				{
-					Toast.instance.ShowMessage ("Press again to exit game", 2f);
-					EscTime = Time.time;
-
-				}
-			}
-		}
-
+	
 	public void LoadSceneByName(string sceneName)
 	{
 		SceneManager.LoadScene (sceneName);

@@ -1229,6 +1229,9 @@ MonoBehaviour:
       game_id: 
       description: 
       image_url: 
+      ss_1: 
+      ss_2: 
+      ss_3: 
       download_link: 
     new_arrival: []
     our_games: []
@@ -1240,6 +1243,9 @@ MonoBehaviour:
     game_id: 
     description: 
     image_url: 
+    ss_1: 
+    ss_2: 
+    ss_3: 
     download_link: 
 --- !u!114 &1800492363
 MonoBehaviour:
@@ -1264,6 +1270,8 @@ MonoBehaviour:
     Game_Id: nbtest_rr_15
   - SceneName: Hill_Racer_Main_Menu
     Game_Id: nbtest_hr_6
+  - SceneName: Ludo_Home
+    Game_Id: nbtest_ludo_28
 --- !u!1 &1930241589
 GameObject:
   m_ObjectHideFlags: 0

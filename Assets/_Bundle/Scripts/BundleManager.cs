@@ -28,7 +28,7 @@ public class BundleManager : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            if (pairing_screen.activeSelf)
+            if (pairing_screen.activeSelf || WifiManager.Instance.isClientConnected)
             {
                 pairing_screen.SetActive(false);
                 MyController.Instance.backToGameLobby();
@@ -75,6 +75,6 @@ public class BundleManager : MonoBehaviour
     void quitGameByCloseBtn()
     {
         //close connectin, off android server
-        SceneManager.LoadSceneAsync("GameListing");
+        SceneManager.LoadSceneAsync("GameListing_New");
     }
 }
